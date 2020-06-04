@@ -2,7 +2,7 @@
 title: "Reproducible Research Project I"
 author: "Vishal"
 date: "04/06/2020"
-output: md_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -15,7 +15,7 @@ library(dplyr)
 
 ## Loading and preprocessing the data
 
-```{r, results='markup', warning=TRUE, message=TRUE}
+```{r echo=TRUE, message=TRUE, warning=TRUE, results='markup'}
 if(!file.exists('activity.csv')){
   unzip('activity.zip')
 }
@@ -28,7 +28,7 @@ dfActivity <- read.csv('activity.csv')
 
 A new dataframe is created to count the number of steps on a particular date. And then the same is plotted using ggplot library.
 
-```{r}
+```{r echo=TRUE}
 dfActivity2 <- dfActivity %>%
   group_by(date) %>%
   summarise(totalSteps = sum(steps, na.rm = TRUE))
@@ -40,7 +40,7 @@ ggplot(dfActivity2, aes(totalSteps)) +
 
 ## Mean and median number of steps taken each day
 
-```{r}
+```{r echo=TRUE}
 stepsMean <- mean(dfActivity2$totalSteps)
 stepsMedian <- median(dfActivity2$totalSteps)
 
@@ -49,7 +49,7 @@ cat("median of steps taken: ", stepsMedian)
 ```
 
 ## Time series plot of the average number of steps taken
-```{r}
+```{r echo=TRUE}
 dfActivity3 <- dfActivity %>%
   group_by(interval) %>%
   summarise(meanSteps = mean(steps, na.rm = TRUE))
@@ -63,7 +63,7 @@ ggplot(dfActivity3, aes(interval, meanSteps)) +
 
 ## The 5-minute interval that, on average, contains the maximum number of steps
 
-```{r}
+```{r echo=TRUE}
 maxAvgSteps <- which.max(dfActivity3$meanSteps)
 maxAvgBy5MinInterval <- dfActivity3[maxAvgSteps, 'interval']
 maxAvgBy5MinInterval <- gsub("([0-9]{1,2})([0-9]{2})", "\\1:\\2", maxAvgBy5MinInterval)
@@ -80,7 +80,7 @@ The folowing startegy is used for imputing the missing data:
 
 3. Then the column in the new dataframe is updated with the imputed data.
 
-```{r}
+```{r echo=TRUE}
 dfActivityImputed <- dfActivity
 imputeFunction <- function(x) {
   replace(x, is.na(x), mean(x, na.rm = TRUE))
@@ -93,7 +93,7 @@ head(dfActivityImputed)
 
 ## Histogram of the total number of steps taken each day after missing values are imputed
 
-```{r}
+```{r echo=TRUE}
 dfActivityImputedDailySteps <- dfActivityImputed %>%
   group_by(date) %>%
   summarise(totalSteps = sum(steps))
@@ -106,7 +106,7 @@ ggplot(dfActivityImputedDailySteps, aes(totalSteps)) +
 
 ## Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
 
-```{r}
+```{r echo=TRUE}
 dfActivityImputed$date <- as.Date(dfActivityImputed$date, '%Y-%m-%d')
 
 weekdays1 <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
