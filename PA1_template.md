@@ -1,5 +1,3 @@
-    knitr::opts_chunk$set(echo = TRUE)
-
 Loading and preprocessing the data
 ----------------------------------
 
