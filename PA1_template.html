@@ -377,6 +377,7 @@ $(document).ready(function () {
 </div>
 
 
+<pre class="r"><code>knitr::opts_chunk$set(echo = TRUE)</code></pre>
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>
 <pre class="r"><code>if(!file.exists(&#39;activity.csv&#39;)){
@@ -388,16 +389,6 @@ dfActivity &lt;- read.csv(&#39;activity.csv&#39;)</code></pre>
 <div id="histogram-of-the-total-number-of-steps-taken-each-day" class="section level2">
 <h2>Histogram of the total number of steps taken each day</h2>
 <p>A new dataframe is created to count the number of steps on a particular date. And then the same is plotted using ggplot library.</p>
-<pre class="r"><code>library(ggplot2)
-library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
 <pre class="r"><code>dfActivity2 &lt;- dfActivity %&gt;%
   group_by(date) %&gt;%
   summarise(totalSteps = sum(steps, na.rm = TRUE))

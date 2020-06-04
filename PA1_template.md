@@ -1,3 +1,5 @@
+    knitr::opts_chunk$set(echo = TRUE)
+
 Loading and preprocessing the data
 ----------------------------------
 
@@ -13,20 +15,6 @@ Histogram of the total number of steps taken each day
 A new dataframe is created to count the number of steps on a particular
 date. And then the same is plotted using ggplot library.
 
-    library(ggplot2)
-    library(dplyr)
-
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
-
     dfActivity2 <- dfActivity %>%
       group_by(date) %>%
       summarise(totalSteps = sum(steps, na.rm = TRUE))
@@ -35,7 +23,7 @@ date. And then the same is plotted using ggplot library.
       geom_histogram(binwidth = 500) +
       ggtitle("Total number of steps taken each day")
 
-![](PA1_template_files/figure-markdown_strict/unnamed-chunk-2-1.png)
+![](PA1_template_files/figure-markdown_strict/unnamed-chunk-3-1.png)
 
 Mean and median number of steps taken each day
 ----------------------------------------------
@@ -64,7 +52,7 @@ Time series plot of the average number of steps taken
       xlab("5 minute interval") +
       ylab("Mean number of steps")
 
-![](PA1_template_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+![](PA1_template_files/figure-markdown_strict/unnamed-chunk-5-1.png)
 
 The 5-minute interval that, on average, contains the maximum number of steps
 ----------------------------------------------------------------------------
@@ -120,7 +108,7 @@ Histogram of the total number of steps taken each day after missing values are i
       ggtitle("Number of steps taken per day (Imputed data)") +
       xlab("Total steps")
 
-![](PA1_template_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+![](PA1_template_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
 Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
 ---------------------------------------------------------------------------------------------------------
@@ -149,4 +137,4 @@ Panel plot comparing the average number of steps taken per 5-minute interval acr
       ggtitle("Comparison of avg. number of steps taken on weekends and weekdays") +
       ylab("Average steps")
 
-![](PA1_template_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+![](PA1_template_files/figure-markdown_strict/unnamed-chunk-9-1.png)

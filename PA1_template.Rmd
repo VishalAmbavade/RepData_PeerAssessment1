@@ -5,13 +5,17 @@ date: "04/06/2020"
 output: md_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
+```
+```{r, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+library(ggplot2)
+library(dplyr)
 ```
 
 ## Loading and preprocessing the data
 
-```{r}
+```{r, results='markup', warning=TRUE, message=TRUE}
 if(!file.exists('activity.csv')){
   unzip('activity.zip')
 }
@@ -25,9 +29,6 @@ dfActivity <- read.csv('activity.csv')
 A new dataframe is created to count the number of steps on a particular date. And then the same is plotted using ggplot library.
 
 ```{r}
-library(ggplot2)
-library(dplyr)
-
 dfActivity2 <- dfActivity %>%
   group_by(date) %>%
   summarise(totalSteps = sum(steps, na.rm = TRUE))
